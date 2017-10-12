@@ -27,4 +27,7 @@ if __name__ == '__main__':
     GPIO.add_event_detect(ROTATE_LEFT_PIN, GPIO.FALLING,
                           callback=rotate_left, bouncetime=200)
     while True:
+        input_state = GPIO.input(SPEED_PIN)
+        if input_state == False:
+            print('Button Pressed')
         time.sleep(1)
