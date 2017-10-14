@@ -95,6 +95,22 @@ void sendMessage() {
       padStart = message.length();
       Wire.write(message.c_str());
       break;
+    case LEFT_THRUSTER:
+      message = "Left Thruster speed=";
+      message += leftThruster.getSpeed();
+      message += ", dir=";
+      message += leftThruster.getDirection();
+      padStart = message.length();
+      Wire.write(message.c_str());
+      break;
+    case LEFT_THRUSTER:
+      message = "Left Thruster speed=";
+      message += leftThruster.getSpeed();
+      message += ", dir=";
+      message += leftThruster.getDirection();
+      padStart = message.length();
+      Wire.write(message.c_str());
+      break;
     default:
       break;
   }
