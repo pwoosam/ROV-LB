@@ -5,6 +5,10 @@
 // The i2c address of the Arduino
 #define SLAVE_ADDRESS 0x2f
 
+// Pins used for thrusters
+const int pwmLeftThruster = 5;
+const int dirLeftThruster = 4;
+
 // Create register and objects for servo1 (This is here as an example for moving servos)
 #define SERVO_1 0x00
 Servo servo1;
@@ -13,6 +17,10 @@ int servo1loc = 90;  // This is the starting position for the servo
 // Create register and object for elevatorThruster
 #define ELEVATOR_THRUSTER 0x10
 Thruster elevatorThruster = Thruster(3, 7);
+
+// Create register and object for leftThruster
+#define LEFT_THRUSTER 0x11
+Thruster leftThruster = Thruster(pwmLeftThruster, dirLeftThruster);
 
 // These variables keep track of which messages were sent and to whom
 byte recentMessageRegister;
@@ -54,6 +62,9 @@ void recvMessage(int byteLength) {
     case ELEVATOR_THRUSTER:
       elevatorThruster.setFromMessage(message);
       break;
+    case LEFT_THRUSTER:
+      leftThruster.setFromMessage(message);
+      break;
     default:
       break;
   }
@@ -81,6 +92,14 @@ void sendMessage() {
       message += elevatorThruster.getSpeed();
       message += ", dir=";
       message += elevatorThruster.getDirection();
+      padStart = message.length();
+      Wire.write(message.c_str());
+      break;
+    case LEFT_THRUSTER:
+      message = "Left Thruster speed=";
+      message += leftThruster.getSpeed();
+      message += ", dir=";
+      message += leftThruster.getDirection();
       padStart = message.length();
       Wire.write(message.c_str());
       break;
