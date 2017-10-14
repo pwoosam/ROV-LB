@@ -62,6 +62,9 @@ void recvMessage(int byteLength) {
     case ELEVATOR_THRUSTER:
       elevatorThruster.setFromMessage(message);
       break;
+    case LEFT_THRUSTER:
+      leftThruster.setFromMessage(message);
+      break;
     default:
       break;
   }
