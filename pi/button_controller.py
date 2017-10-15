@@ -107,7 +107,4 @@ if __name__ == '__main__':
     GPIO.add_event_detect(DESCEND_PIN, GPIO.FALLING,
                           callback=descend, bouncetime=200)
     while True:
-        input_state = GPIO.input(SPEED_PIN)
-        if input_state is False:
-            print('Button Pressed')
         time.sleep(1)
