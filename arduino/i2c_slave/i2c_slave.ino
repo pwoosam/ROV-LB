@@ -5,6 +5,13 @@
 // The i2c address of the Arduino
 #define SLAVE_ADDRESS 0x2f
 
+// Servo Pin
+const int servoPin = 2;
+
+// Pins used for Elevator Thruster
+const int pwmElevatorThruster = 3;
+const int dirElevatorThruster = 7;
+
 // Pins used for Left Thrusters
 const int pwmLeftThruster = 5;
 const int dirLeftThruster = 4;
@@ -20,7 +27,7 @@ int servo1loc = 90;  // This is the starting position for the servo
 
 // Create register and object for elevatorThruster
 #define ELEVATOR_THRUSTER 0x10
-Thruster elevatorThruster = Thruster(3, 7);
+Thruster elevatorThruster = Thruster(pwmElevatorThruster, dirElevatorThruster);
 
 // Create register and object for leftThruster
 #define LEFT_THRUSTER 0x11
@@ -39,7 +46,7 @@ void setup() {
   Wire.onReceive(recvMessage);
   Wire.onRequest(sendMessage);
   Serial.begin(9600);
-  servo1.attach(2);
+  servo1.attach(servoPin);
 }
 
 void loop() {
