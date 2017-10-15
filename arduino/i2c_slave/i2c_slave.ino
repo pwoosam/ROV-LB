@@ -5,9 +5,13 @@
 // The i2c address of the Arduino
 #define SLAVE_ADDRESS 0x2f
 
-// Pins used for thrusters
+// Pins used for Left Thrusters
 const int pwmLeftThruster = 5;
 const int dirLeftThruster = 4;
+
+// Pins used for Right Thrusters
+const int pwmRightThruster = 6;
+const int dirRightThruster = 8;
 
 // Create register and objects for servo1 (This is here as an example for moving servos)
 #define SERVO_1 0x00
@@ -21,6 +25,10 @@ Thruster elevatorThruster = Thruster(3, 7);
 // Create register and object for leftThruster
 #define LEFT_THRUSTER 0x11
 Thruster leftThruster = Thruster(pwmLeftThruster, dirLeftThruster);
+
+// Create register and object for rightThruster
+#define RIGHT_THRUSTER 0x12
+Thruster rightThruster = Thruster(pwmRightThruster, dirRightThruster);
 
 // These variables keep track of which messages were sent and to whom
 byte recentMessageRegister;
