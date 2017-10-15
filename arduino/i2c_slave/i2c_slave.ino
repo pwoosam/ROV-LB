@@ -82,6 +82,7 @@ void recvMessage(int byteLength) {
       break;
     case RIGHT_THRUSTER:
       rightThruster.setFromMessage(message);
+      break;
     default:
       break;
   }
