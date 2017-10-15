@@ -73,6 +73,8 @@ void recvMessage(int byteLength) {
     case LEFT_THRUSTER:
       leftThruster.setFromMessage(message);
       break;
+    case RIGHT_THRUSTER:
+      rightThruster.setFromMessage(message);
     default:
       break;
   }
@@ -108,6 +110,14 @@ void sendMessage() {
       message += leftThruster.getSpeed();
       message += ", dir=";
       message += leftThruster.getDirection();
+      padStart = message.length();
+      Wire.write(message.c_str());
+      break;
+    case RIGHT_THRUSTER:
+      message = "Right Thruster speed=";
+      message += rightThruster.getSpeed();
+      message += ", dir=";
+      message += rightThruster.getDirection();
       padStart = message.length();
       Wire.write(message.c_str());
       break;
