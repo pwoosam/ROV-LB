@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import pygame.joystick
+import pygame
 import time
 import sys
 
@@ -17,6 +17,7 @@ class Joystick:
         self.joystick.quit()
 
     def update(self):
+        pygame.event.get()
         for button_id in range(self.joystick.get_numbuttons()):
             setattr(self, 'button_' + str(button_id),
                     self.joystick.get_button(button_id))
@@ -43,7 +44,7 @@ class Joystick:
 
     def get_axis_vals(self):
         axes = {}
-        for axis_id in range(self.joystick.get_numhats()):
+        for axis_id in range(self.joystick.get_numaxes()):
             value = getattr(self, 'axis_' + str(axis_id))
             axes['axis_' + str(axis_id)] = value
         return axes
@@ -57,6 +58,7 @@ class Joystick:
 
 
 if __name__ == '__main__':
+    pygame.init()
     pygame.joystick.init()
 
     # Findout which joystick to use as controller
@@ -80,8 +82,8 @@ if __name__ == '__main__':
             try:
                 controller.update()
                 all_vals = controller.get_all_vals()
-                print(*all_vals.items())
-                time.sleep(1)
+                print(*all_vals.items(), sep='\n')
+                time.sleep(0.01)
             except KeyboardInterrupt:
                 break
 
