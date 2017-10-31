@@ -2,6 +2,7 @@
 import pygame
 import time
 import sys
+from collections import OrderedDict
 
 
 class Joystick:
@@ -82,8 +83,9 @@ if __name__ == '__main__':
             try:
                 controller.update()
                 all_vals = controller.get_all_vals()
+                all_vals = OrderedDict(sorted(all_vals.items(), key=lambda d: d[0]))
                 print(*all_vals.items(), sep='\n')
-                time.sleep(0.01)
+                time.sleep(0.05)
             except KeyboardInterrupt:
                 break
 
